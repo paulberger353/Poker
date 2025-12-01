@@ -1,0 +1,14 @@
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\MainWindow.g.cs
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\App.g.cs
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker_MarkupCompile.cache
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker_MarkupCompile.lref
+C:\Users\bergpa\source\repos\Poker\Poker\bin\Debug\Poker.exe.config
+C:\Users\bergpa\source\repos\Poker\Poker\bin\Debug\Poker.exe
+C:\Users\bergpa\source\repos\Poker\Poker\bin\Debug\Poker.pdb
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\MainWindow.baml
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker.g.resources
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker.Properties.Resources.resources
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker.csproj.GenerateResource.cache
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker.csproj.CoreCompileInputs.cache
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker.exe
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker.pdb
