@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Poker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000">
+        Title="MainWindow" Height="600" Width="1000"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.Resources>
     </Window.Resources>  
     
@@ -19,7 +20,7 @@
         <Grid x:Name="gridHeader" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"/>
-                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.6*"/>
                 <ColumnDefinition Width="0.1*"/>
                 <ColumnDefinition Width="0.1*"/>
             </Grid.ColumnDefinitions>

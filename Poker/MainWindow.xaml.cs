@@ -30,7 +30,7 @@ namespace Poker
         }
 
 
-        #region Header Settings, Info, Minimize, Close
+        #region Header Settings, Info, AddBalance, Minimize, Close
 
         /// <summary>
         /// Methode wird aufgerufen um wieder Balance hinzuzufügen
@@ -51,7 +51,11 @@ namespace Poker
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Infos_Click(object sender, RoutedEventArgs e) { }
+        private void Infos_Click(object sender, RoutedEventArgs e) 
+        {
+            //Öffne Info Window
+            new InfoWindow().Show();
+        }
 
         /// <summary>
         /// Methode wird aufgerufen um das Fenster zu minimieren
@@ -76,6 +80,16 @@ namespace Poker
             {
                 this.Close();
             }           
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
 
         #endregion

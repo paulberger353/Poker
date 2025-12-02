@@ -1,0 +1,134 @@
+﻿<Window x:Class="Poker.InfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Poker"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="Poker Informationen" 
+        Height="600" Width="1200" 
+        AllowsTransparency="True"
+        Background="#121212">
+
+    <Grid MouseLeftButtonDown="Window_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="0.9*" />
+            </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="DimGray">
+            <TextBlock FontSize="22" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Run FontWeight="Bold" Foreground="White" TextDecorations="Underline">PP </Run> &#x2003;&#x2003; Pauls Poker
+            </TextBlock>
+        </Grid>
+
+        <Button Click="Minimize_Click" Grid.Column="1" Grid.Row="0"
+                    Content="_" FontSize="20" FontWeight="Bold" Background="#333333" 
+                    Foreground="White" BorderThickness="0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#555555"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Click="Close_Click" Grid.Column="2" Grid.Row="0"
+                    Content="X" FontSize="20" FontWeight="Bold" Background="#252525" 
+                    Foreground="White" BorderThickness="0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="0 12 0 0">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#CC2937"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <ScrollViewer Grid.Row="1" Grid.ColumnSpan="3" Padding="30" VerticalScrollBarVisibility="Hidden">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="1" Background="#333333" Width="1" Margin="15,10" />
+
+                    <StackPanel Grid.Column="0" Margin="0,20,10,0">
+                        <TextBlock Text="SPIELREGELN &amp; ABLAUF" FontSize="26" FontWeight="ExtraBold" Margin="0,0,0,15" Foreground="White"/>
+
+                        <TextBlock Text="Ziel des Spiels" FontSize="20" FontWeight="Bold" Margin="0,10,0,5" Foreground="#EEEEEE"/>
+                        <TextBlock Text="Gewinne alle Chips deiner Gegner, indem du die beste Hand bildest und strategisch kluge Entscheidungen triffst. Du spielst gegen 1-5 KI-Gegner." TextWrapping="Wrap" Margin="0,0,0,20" FontSize="16" Foreground="#AAAAAA"/>
+
+                        <TextBlock Text="Spielablauf (Streets)" FontSize="20" FontWeight="Bold" Margin="0,0,0,5" Foreground="#EEEEEE"/>
+                        <StackPanel Margin="10,0,0,20">
+                            <TextBlock FontSize="16" Foreground="#AAAAAA" Margin="0,5,0,0"><Run FontWeight="Bold" Foreground="White">1. Pre-Flop:</Run> Einsatzrunde nach Austeilen der Starthände (2 Karten).</TextBlock>
+                            <TextBlock FontSize="16" Foreground="#AAAAAA" Margin="0,5,0,0"><Run FontWeight="Bold" Foreground="White">2. Flop:</Run> 3 Gemeinschaftskarten werden aufgedeckt. Nächste Einsatzrunde.</TextBlock>
+                            <TextBlock FontSize="16" Foreground="#AAAAAA" Margin="0,5,0,0"><Run FontWeight="Bold" Foreground="White">3. Turn:</Run> 4. Gemeinschaftskarte wird aufgedeckt. Nächste Einsatzrunde.</TextBlock>
+                            <TextBlock FontSize="16" Foreground="#AAAAAA" Margin="0,5,0,0"><Run FontWeight="Bold" Foreground="White">4. River:</Run> 5. und letzte Gemeinschaftskarte wird aufgedeckt. Letzte Einsatzrunde.</TextBlock>
+                        </StackPanel>
+
+                        <TextBlock Text="Spieler-Aktionen" FontSize="20" FontWeight="Bold" Margin="0,0,0,5" Foreground="#EEEEEE"/>
+                        <StackPanel Margin="10,0,0,0">
+                            <TextBlock FontSize="16" Margin="0,5,0,0" Foreground="#AAAAAA"><Run FontWeight="Bold" Foreground="White">FOLD (Passen):</Run> Die Hand aufgeben und den aktuellen Pot verlieren.</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,5,0,0" Foreground="#AAAAAA"><Run FontWeight="Bold" Foreground="White">CHECK (Schieben):</Run> Setzt keinen weiteren Einsatz, wenn niemand vor dir gesetzt hat.</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,5,0,0" Foreground="#AAAAAA"><Run FontWeight="Bold" Foreground="White">CALL (Mitgehen):</Run> Den letzten Einsatz eines Gegners angleichen.</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,5,0,0" Foreground="#AAAAAA"><Run FontWeight="Bold" Foreground="White">RAISE (Erhöhen):</Run> Einen höheren Einsatz setzen als der letzte gesetzte Betrag.</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Margin="10,40,0,0">
+                        <TextBlock Text="MÖGLICHE KOMBINATIONEN (HAND RANKING)" FontSize="26" FontWeight="ExtraBold" Margin="0,0,0,15" Foreground="White"/>
+
+                        <TextBlock Text="Die Reihenfolge von Höchster (1) zu Niedrigster (10):" TextWrapping="Wrap" Margin="0,0,0,15" FontSize="16" Foreground="#EEEEEE"/>
+
+                        <StackPanel Margin="0,0,0,10">
+                            <TextBlock FontSize="16" Margin="0,4,0,0" Foreground="#CCCCCC"><Run FontWeight="Bold" Foreground="White">1. Royal Flush:</Run> 10, J, Q, K, A in derselben Farbe. (Höchstes Blatt)</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,4,0,0" Foreground="#CCCCCC"><Run FontWeight="Bold" Foreground="White">2. Straight Flush:</Run> Fünf aufeinanderfolgende Karten derselben Farbe. (z.B. 5-9)</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,4,0,0" Foreground="#CCCCCC"><Run FontWeight="Bold" Foreground="White">3. Four of a Kind:</Run> Vier Karten mit gleichem Wert.</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,4,0,0" Foreground="#CCCCCC"><Run FontWeight="Bold" Foreground="White">4. Full House:</Run> Drei Karten des gleichen Werts und ein Paar (z.B. Q-Q-Q-7-7).</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,4,0,0" Foreground="#CCCCCC"><Run FontWeight="Bold" Foreground="White">5. Flush:</Run> Fünf beliebige Karten der gleichen Farbe.</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,4,0,0" Foreground="#CCCCCC"><Run FontWeight="Bold" Foreground="White">6. Straight:</Run> Fünf aufeinanderfolgende Karten, verschiedene Farben.</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,4,0,0" Foreground="#CCCCCC"><Run FontWeight="Bold" Foreground="White">7. Three of a Kind:</Run> Drei Karten mit gleichem Wert.</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,4,0,0" Foreground="#CCCCCC"><Run FontWeight="Bold" Foreground="White">8. Two Pair:</Run> Zwei verschiedene Paare.</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,4,0,0" Foreground="#CCCCCC"><Run FontWeight="Bold" Foreground="White">9. Pair:</Run> Zwei Karten mit gleichem Wert.</TextBlock>
+                            <TextBlock FontSize="16" Margin="0,4,0,0" Foreground="#CCCCCC"><Run FontWeight="Bold" Foreground="White">10. High Card:</Run> Keine der oben genannten Kombinationen. Die höchste Einzelkarte zählt.</TextBlock>
+                        </StackPanel>
+
+                        <TextBlock Text="Die beste 5-Karten-Kombination aus deinen 7 verfügbaren Karten gewinnt!" FontSize="16" FontStyle="Italic" Margin="0,30,0,0" HorizontalAlignment="Center" Foreground="#777777"/>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+</Window>
