@@ -14,4 +14,5 @@ C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker.exe
 C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker.pdb
 C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\InfoWindow.g.cs
 C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\InfoWindow.baml
+C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker_Content.g.cs
 C:\Users\bergpa\source\repos\Poker\Poker\obj\Debug\Poker.csproj.AssemblyReference.cache

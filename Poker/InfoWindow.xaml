@@ -10,6 +10,54 @@
         Height="600" Width="1200" 
         AllowsTransparency="True"
         Background="#121212">
+    <Window.Resources>
+        <Style x:Key="NoHover" TargetType="Button">
+
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="true">
+
+                            <ContentPresenter x:Name="contentPresenter" 
+                                      Focusable="False" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                      Margin="{TemplateBinding Padding}" 
+                                      RecognizesAccessKey="True" 
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FFC4C4C4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFC4C4C4"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#FFADADAD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Grid MouseLeftButtonDown="Window_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
@@ -22,14 +70,14 @@
                 <RowDefinition Height="0.9*" />
             </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="DimGray">
-            <TextBlock FontSize="22" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Run FontWeight="Bold" Foreground="White" TextDecorations="Underline">PP </Run> &#x2003;&#x2003; Pauls Poker
-            </TextBlock>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray">
+            <Label Content="Paul's Poker" Grid.Column="2"
+                   FontSize="30" FontFamily="arial" FontWeight="SemiBold" 
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </Grid>
 
         <Button Click="Minimize_Click" Grid.Column="1" Grid.Row="0"
-                    Content="_" FontSize="20" FontWeight="Bold" Background="#333333" 
+                    Content="_" FontSize="20" FontWeight="Bold" Background="gray" 
                     Foreground="White" BorderThickness="0">
                 <Button.Style>
                     <Style TargetType="Button">
@@ -44,7 +92,7 @@
                         </Setter>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#555555"/>
+                                <Setter Property="Background" Value="gray"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -52,8 +100,8 @@
             </Button>
 
             <Button Click="Close_Click" Grid.Column="2" Grid.Row="0"
-                    Content="X" FontSize="20" FontWeight="Bold" Background="#252525" 
-                    Foreground="White" BorderThickness="0">
+                    Content="X" FontSize="20" FontWeight="Bold" Background="gray" 
+                    Foreground="White" BorderBrush="DimGray" BorderThickness="1">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">

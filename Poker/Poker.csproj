@@ -59,6 +59,12 @@
     <Compile Include="InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Komponenten\Karte.cs" />
+    <Compile Include="Komponenten\Kartendeck.cs" />
+    <Compile Include="SpielerLogik\Gegner.cs" />
+    <Compile Include="SpielerLogik\HandCalculator.cs" />
+    <Compile Include="SpielerLogik\Spieler.cs" />
+    <Compile Include="Tisch.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,6 +111,63 @@
   <ItemGroup>
     <Resource Include="img\header\info.png" />
     <Resource Include="img\header\settings.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="img\table_background.jpg" />
+    <Resource Include="img\cards\KreuzAss.png" />
+    <Resource Include="img\cards\KreuzZehn.png" />
+    <Resource Include="img\cards\KreuzBube.png" />
+    <Resource Include="img\cards\KreuzDame.png" />
+    <Resource Include="img\cards\KreuzKoenig.png" />
+    <Resource Include="img\cards\KreuzZwei.png" />
+    <Resource Include="img\cards\KreuzDrei.png" />
+    <Resource Include="img\cards\KreuzVier.png" />
+    <Resource Include="img\cards\KreuzFuenf.png" />
+    <Resource Include="img\cards\KreuzSechs.png" />
+    <Resource Include="img\cards\KreuzSieben.png" />
+    <Resource Include="img\cards\KreuzAcht.png" />
+    <Resource Include="img\cards\KreuzNeun.png" />
+    <Resource Include="img\cards\KaroAss.png" />
+    <Resource Include="img\cards\KaroZehn.png" />
+    <Resource Include="img\cards\KaroBube.png" />
+    <Resource Include="img\cards\KaroDame.png" />
+    <Resource Include="img\cards\KaroKoenig.png" />
+    <Resource Include="img\cards\KaroZwei.png" />
+    <Resource Include="img\cards\KaroDrei.png" />
+    <Resource Include="img\cards\KaroVier.png" />
+    <Resource Include="img\cards\KaroFuenf.png" />
+    <Resource Include="img\cards\KaroSechs.png" />
+    <Resource Include="img\cards\KaroSieben.png" />
+    <Resource Include="img\cards\KaroAcht.png" />
+    <Resource Include="img\cards\KaroNeun.png" />
+    <Resource Include="img\cards\HerzAss.png" />
+    <Resource Include="img\cards\HerzZehn.png" />
+    <Resource Include="img\cards\HerzBube.png" />
+    <Resource Include="img\cards\HerzDame.png" />
+    <Resource Include="img\cards\HerzKoenig.png" />
+    <Resource Include="img\cards\HerzZwei.png" />
+    <Resource Include="img\cards\HerzDrei.png" />
+    <Resource Include="img\cards\HerzVier.png" />
+    <Resource Include="img\cards\HerzFuenf.png" />
+    <Resource Include="img\cards\HerzSechs.png" />
+    <Resource Include="img\cards\HerzSieben.png" />
+    <Resource Include="img\cards\HerzAcht.png" />
+    <Resource Include="img\cards\HerzNeun.png" />
+    <Resource Include="img\cards\PiekAss.png" />
+    <Resource Include="img\cards\PiekZehn.png" />
+    <Resource Include="img\cards\PiekBube.png" />
+    <Resource Include="img\cards\PiekDame.png" />
+    <Resource Include="img\cards\PiekKoenig.png" />
+    <Resource Include="img\cards\PiekZwei.png" />
+    <Resource Include="img\cards\PiekDrei.png" />
+    <Resource Include="img\cards\PiekVier.png" />
+    <Resource Include="img\cards\PiekFuenf.png" />
+    <Resource Include="img\cards\PiekSechs.png" />
+    <Resource Include="img\cards\PiekSieben.png" />
+    <Resource Include="img\cards\PiekAcht.png" />
+    <Resource Include="img\cards\placeholder.png" />
+    <Content Include="img\cards\PiekNeun.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

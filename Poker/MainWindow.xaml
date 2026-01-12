@@ -5,27 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Poker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000"
+        Title="MainWindow"
+        WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.Resources>
-    </Window.Resources>  
-    
-    <Grid Background="LightGray">
+        <Style x:Key="NoHover" TargetType="Button">
+
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="true">
+
+                            <ContentPresenter x:Name="contentPresenter" 
+                                      Focusable="False" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                      Margin="{TemplateBinding Padding}" 
+                                      RecognizesAccessKey="True" 
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FFC4C4C4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFC4C4C4"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#FFADADAD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="LightGray" RenderTransformOrigin="0.5,0.5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.07*"/>
-            <RowDefinition Height="0.93*"/>
+            <RowDefinition Height="0.075*"/>
+            <RowDefinition Height="0.925*"/>
         </Grid.RowDefinitions>
-        
+
         <!--Grid zum öffnen der Einstellungen, Infos, schließen/minimieren, etc.-->
         <Grid x:Name="gridHeader" Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.1*"/>
                 <ColumnDefinition Width="0.6*"/>
                 <ColumnDefinition Width="0.1*"/>
                 <ColumnDefinition Width="0.1*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Click="Infos_Click" Grid.Row="0" Grid.Column="0">
+            <Button Click="Infos_Click" Grid.Row="0" Grid.Column="0" Height="50">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="Transparent" 
@@ -40,20 +88,28 @@
             </Button>
 
             <Button Click="AddBalance_Click" Grid.Column="1" Background="Gray"
-                    Content="Add Balance" Width="300" Height="30" FontSize="20"
-                    BorderBrush="Transparent" BorderThickness="0" IsEnabled="False"/>
+                    Content="Add Balance" Height="40" FontSize="20"
+                    BorderBrush="Transparent" BorderThickness="0" IsEnabled="False"
+                    Style="{StaticResource NoHover}"/>
 
-            <Button Click="Minimize_Click" Grid.Column="2"
-                Content="_" FontSize="25" Background="Gray">
+            <Label Content="Paul's Poker" Grid.Column="2"
+                   FontSize="40" FontFamily="arial" FontWeight="SemiBold" 
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+            <Button Click="Minimize_Click" Grid.Column="3" 
+                    Height="40" VerticalAlignment="Top" VerticalContentAlignment="Bottom"
+                Content="-" FontSize="25" Background="Gray" Style="{StaticResource NoHover}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="0 0 0 10" />
                     </Style>
                 </Button.Resources>
             </Button>
-            
-            <Button Click="Close_Click" Grid.Column="3"
-                    Content="X" FontSize="25" Background="Gray">
+
+            <Button Click="Close_Click" Grid.Column="4"
+                    Height="40" VerticalAlignment="Top" VerticalContentAlignment="Top"
+                    Content="X" FontSize="25" Background="Gray"
+                    Style="{StaticResource NoHover}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="0 0 10 0" />
@@ -61,18 +117,139 @@
                 </Button.Resources>
             </Button>
         </Grid>
-        
-        <!--Grid um anz. Spieler auszuwählen-->
-        <Grid x:Name="gridLoadingscreen" Visibility="Visible" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.2*"></RowDefinition>
-                <RowDefinition Height="0.6*"></RowDefinition>
-                <RowDefinition Height="0.2*"></RowDefinition>
-            </Grid.RowDefinitions>
-        </Grid>
-        
-        <!--Eigentliches Grid des Games-->
-        <Grid x:Name="gridGame" Visibility="Hidden" Grid.Row="1"></Grid>
 
+        <!--Eigentliches Grid des Games-->
+        <Grid x:Name="gridGame" Grid.Row="1" Margin="4,0,-4,0">
+            <Grid.Background>
+                <ImageBrush ImageSource="img/table_background.jpg" Stretch="UniformToFill"/>
+            </Grid.Background>
+
+            <!--Karten der Spieler1 bis 4-->
+            <Image HorizontalAlignment="Left" Margin="30,32,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="gegner1_1"/>
+            <Image HorizontalAlignment="Left" Margin="220,32,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="gegner1_2"/>
+            <TextBlock Height="40" Width="350" Margin="30,265,0,0" 
+                       Text="Spieler 1" FontSize="30" Background="Gray" 
+                       VerticalAlignment="Top" HorizontalAlignment="Left" TextAlignment="Center"/>
+            <Label Height="40" Width="175" Margin="30,305,0,0" x:Name="labGuthaben1"
+                        Content="" FontSize="20" Background="DImGray" 
+                        HorizontalAlignment="Left"  VerticalAlignment="Top"
+                        BorderBrush="Black" BorderThickness="1"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label Height="40" Width="175" Margin="205,305,0,0" x:Name="labEinsatz1"
+                        Content="" FontSize="20" Background="DImGray" 
+                        HorizontalAlignment="Left"  VerticalAlignment="Top"
+                        BorderBrush="Black" BorderThickness="1"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+            
+            <Image HorizontalAlignment="Left" Margin="450,32,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="gegner2_1"/>
+            <Image HorizontalAlignment="Left" Margin="640,32,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="gegner2_2"/>
+            <TextBlock Height="40" Width="350" Margin="450,265,0,0" 
+                Text="Spieler 2" FontSize="30" Background="Gray" 
+                VerticalAlignment="Top" HorizontalAlignment="Left" TextAlignment="Center"/>
+            <Label Height="40" Width="175" Margin="450,305,0,0" x:Name="labGuthaben2"
+                       Content="" FontSize="20" Background="DImGray" 
+                        BorderBrush="Black" BorderThickness="1"
+                       HorizontalAlignment="Left"  VerticalAlignment="Top"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label Height="40" Width="175" Margin="625,305,0,0" x:Name="labEinsatz2"
+                       Content="" FontSize="20" Background="DImGray" 
+                        BorderBrush="Black" BorderThickness="1"
+                       HorizontalAlignment="Left"  VerticalAlignment="Top"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+            <Image HorizontalAlignment="Left" Margin="875,32,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="gegner3_1"/>
+            <Image HorizontalAlignment="Left" Margin="1065,32,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="gegner3_2"/>
+            <TextBlock Height="40" Width="350" Margin="875,265,0,0" 
+                FontSize="30" Background="Gray" 
+                VerticalAlignment="Top" HorizontalAlignment="Left" TextAlignment="Center" Text="Spieler 3"/>
+            <Label Height="40" Width="175" Margin="874,305,0,0" x:Name="labGuthaben3"
+                       Content="" FontSize="20" Background="DImGray" 
+                        BorderBrush="Black" BorderThickness="1"
+                       HorizontalAlignment="Left"  VerticalAlignment="Top"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label Height="40" Width="175" Margin="1049,305,0,0" x:Name="labEinsatz3"
+                       Content="" FontSize="20" Background="DImGray" 
+                        BorderBrush="Black" BorderThickness="1"
+                       HorizontalAlignment="Left"  VerticalAlignment="Top"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+            <Image HorizontalAlignment="Left" Margin="1290,32,0,0" VerticalAlignment="Top" Width="160" Height="216"  x:Name="gegner4_1"/>
+            <Image HorizontalAlignment="Left" Margin="1480,32,0,0" VerticalAlignment="Top" Width="160" Height="216"  x:Name="gegner4_2"/>
+            <TextBlock Height="40" Width="350" Margin="1290,265,-110,0" 
+                FontSize="30" Background="Gray" 
+                VerticalAlignment="Top" HorizontalAlignment="Left" TextAlignment="Center" Text="Spieler 4"/>
+            <Label Height="40" Width="175" Margin="1290,305,0,0" x:Name="labGuthaben4"
+                       Content="" FontSize="20" Background="DImGray" 
+                        BorderBrush="Black" BorderThickness="1"
+                       HorizontalAlignment="Left"  VerticalAlignment="Top"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label Height="40" Width="175" Margin="1465 ,305,0,0" x:Name="labEinsatz4"
+                       Content="" FontSize="20" Background="DImGray" 
+                        BorderBrush="Black" BorderThickness="1"
+                       HorizontalAlignment="Left"  VerticalAlignment="Top"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+            <!--Buttons für die Actions-->
+            <Button Click="Fold_Click" Content="Fold (Aussteigen)" FontSize="20" x:Name="btnFold"
+                    Background="#303030" Foreground="White"
+                    BorderBrush="Black" BorderThickness="3"
+                    HorizontalAlignment="Left" Margin="571,710,0,0" VerticalAlignment="Top" 
+                    Width="180" Height="55">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Click="Check_Click" Content="Check (Schieben)" FontSize="20" x:Name="btnCheck"
+                Background="#303030" Foreground="White"
+                BorderBrush="Black" BorderThickness="3"
+                HorizontalAlignment="Left" Margin="571,770,0,0" VerticalAlignment="Top" 
+                Width="180" Height="55">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Click="Call_Click" Content="Call (Mitgehen)" FontSize="20" x:Name="btnCall"
+                    Background="#303030" Foreground="White"
+                    BorderBrush="Black" BorderThickness="3"
+                    HorizontalAlignment="Left" Margin="571,830,0,0" VerticalAlignment="Top" 
+                    Width="180" Height="55">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Click="Raise_Click" Content="Raise (Erhöhen)" FontSize="20" x:Name="btnRaise"
+                    Background="#303030" Foreground="White"
+                    BorderBrush="Black" BorderThickness="3"
+                    HorizontalAlignment="Left" Margin="571,891,0,0" VerticalAlignment="Top" 
+                    Width="180" Height="55">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+            <TextBox FontSize="33" Text="400" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                     HorizontalAlignment="Left" Margin="410,890,0,0" VerticalAlignment="Top" 
+                     Width="140" Height="55"/>
+
+            <!--Karten des Spielers-->
+            <Image HorizontalAlignment="Left" Margin="880,720,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="player1_1"/>
+            <Image HorizontalAlignment="Left" Margin="1100,720,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="player1_2"/>
+
+            <!--Gemeinschaftskarten-->
+            <Image HorizontalAlignment="Left" Margin="390,420,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="tablecard1"/>
+            <Image HorizontalAlignment="Left" Margin="580,420,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="tablecard2"/>
+            <Image HorizontalAlignment="Left" Margin="775,420,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="tablecard3"/>
+            <Image HorizontalAlignment="Left" Margin="965,420,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="tablecard4"/>
+            <Image HorizontalAlignment="Left" Margin="1155,420,0,0" VerticalAlignment="Top" Width="160" Height="216" x:Name="tablecard5"/>
+        </Grid>
     </Grid>
 </Window>

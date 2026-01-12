@@ -20,6 +20,8 @@ namespace Poker
     /// </summary>
     public partial class MainWindow : Window
     {
+        Tisch tisch;    //Instanz des Tisches
+
         /// <summary>
         /// Konstruktor des MainWindows
         /// Initialisiert Komponten und die Instanzen der Logikklassen.
@@ -27,6 +29,9 @@ namespace Poker
         public MainWindow()
         {
             InitializeComponent();
+
+            //Instanz des Tisches initialisieren, mit ZUgriff auf UI-Elemente
+            tisch = new Tisch(this);
         }
 
 
@@ -91,6 +96,19 @@ namespace Poker
         {
             this.DragMove();
         }
+
+        #endregion
+
+        #region Call, Raise, Fold
+
+        private void Call_Click(object sender, RoutedEventArgs e) { }
+
+        private void Raise_Click(object sender, RoutedEventArgs e) { }
+
+        private void Fold_Click(object sender, RoutedEventArgs e) { }
+
+        private void Check_Click(object sender, RoutedEventArgs e) { }
+
 
         #endregion
     }
