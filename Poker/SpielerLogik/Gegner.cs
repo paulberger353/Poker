@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Testkommentar
+
 namespace Poker.SpielerLogik
 {
     public class Gegner
